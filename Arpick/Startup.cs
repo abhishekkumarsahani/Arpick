@@ -1,6 +1,7 @@
 ﻿using Arpick.DataAccessLayer.Implementation;
 using Arpick.DataAccessLayer.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -23,6 +24,10 @@ namespace Arpick
 
             #region Dependency Injection
             services.AddScoped<IAuth, Auth>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IImageService, ImageService>();
+
+
 
             #endregion
 
@@ -89,6 +94,14 @@ namespace Arpick
 
             app.UseHttpsRedirection();
 
+            
+
+            // Serve static files from the 'images' directory
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "upload/images")),
+                RequestPath = "/upload/images"
+            });
             app.UseRouting();
 
             app.UseAuthorization();
