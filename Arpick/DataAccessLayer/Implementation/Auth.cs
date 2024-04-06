@@ -263,6 +263,7 @@ namespace Arpick.DataAccessLayer.Implementation
             return Data;
         }
 
+
         //private string GenerateRandomPassword()
         //{
         //    // Generate a random password of desired length

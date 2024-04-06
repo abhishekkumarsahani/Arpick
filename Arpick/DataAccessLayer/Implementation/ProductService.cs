@@ -178,35 +178,7 @@ namespace Arpick.DataAccessLayer.Implementation
                 }
             }
         }
-        //public async Task<ActionResult<IEnumerable<ProductModel>>> GetNewCollections()
-        //{
-        //    using (var connection = new SqlConnection(_configuration["ConnectionStrings:Connection"]))
-        //    {
-        //        await connection.OpenAsync();
-        //        var query = "SELECT TOP 8 * FROM Products WHERE Category != 'clothing' ORDER BY Id DESC";
-        //        using (var command = new SqlCommand(query, connection))
-        //        {
-        //            using (var reader = await command.ExecuteReaderAsync())
-        //            {
-        //                var newCollections = new List<ProductModel>();
-        //                while (await reader.ReadAsync())
-        //                {
-        //                    var product = new ProductModel
-        //                    {
-        //                        Id = reader.GetInt32(reader.GetOrdinal("Id")),
-        //                        Name = reader.GetString(reader.GetOrdinal("Name")),
-        //                        ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
-        //                        OldPrice = reader.GetDecimal(reader.GetOrdinal("OldPrice")),
-        //                        NewPrice = reader.GetDecimal(reader.GetOrdinal("NewPrice")),
-        //                        // Map other properties as needed
-        //                    };
-        //                    newCollections.Add(product);
-        //                }
-        //                return newCollections;
-        //            }
-        //        }
-        //    }
-        //}
+        
         public async Task<List<ProductModel>> GetNewCollections()
         {
             using (var connection = new SqlConnection(_configuration["ConnectionStrings:Connection"]))

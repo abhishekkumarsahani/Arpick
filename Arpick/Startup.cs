@@ -26,6 +26,7 @@ namespace Arpick
             services.AddScoped<IAuth, Auth>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IImageService, ImageService>();
+           
 
 
 

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
+import { ShopContext } from "../../context/ShopContext";
+import { Badge } from "antd";
+
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const { getTotalCartItems } = useContext(ShopContext);
+
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -12,6 +17,7 @@ const Header = () => {
       token: "",
     });
     localStorage.removeItem("auth");
+    localStorage.removeItem("cartItems");
     toast.success("Logout Successfully");
   };
   return (
@@ -81,8 +87,14 @@ const Header = () => {
                 </li>
               </>
             )}
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/cart">
+                <Badge count={getTotalCartItems()} showZero offset={[10, -5]}>
+                    Cart
+                  </Badge>
 
-            {/* Add more navigation links as needed */}
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
