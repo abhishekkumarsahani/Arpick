@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { ShopContext } from "../../context/ShopContext";
 import { Badge } from "antd";
 
-
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const { getTotalCartItems } = useContext(ShopContext);
@@ -76,23 +75,45 @@ const Header = () => {
               </>
             ) : (
               <>
-                <li className="nav-item">
+                <li className="nav-item dropdown">
                   <NavLink
-                    onClick={handleLogout}
-                    to="/signin"
-                    className="nav-link"
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    style={{ border: "none" }}
                   >
-                    Logout
+                    {auth?.user?.email}
                   </NavLink>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <NavLink
+                        to={`/dashboard/${
+                          auth?.user?.role === "admin" ? "admin" : "user"
+                        }`}
+                        className="dropdown-item"
+                      >
+                        Dashboard
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        onClick={handleLogout}
+                        to="/signin"
+                        className="dropdown-item"
+                      >
+                        Logout
+                      </NavLink>
+                    </li>
+                  </ul>
                 </li>
               </>
             )}
             <li className="nav-item">
               <NavLink className="nav-link" to="/cart">
                 <Badge count={getTotalCartItems()} showZero offset={[10, -5]}>
-                    Cart
-                  </Badge>
-
+                  Cart
+                </Badge>
               </NavLink>
             </li>
           </ul>
