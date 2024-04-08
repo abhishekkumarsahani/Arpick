@@ -11,5 +11,6 @@ namespace Arpick.DataAccessLayer.Interface
         Task<bool> RemoveProductAsync(int id);
         Task<List<ProductModel>> GetPopularInCategory(string category);
         Task<List<ProductModel>> GetNewCollections();
-        }
+        IEnumerable<ProductModel> GetRelatedProducts();
+    }
 }

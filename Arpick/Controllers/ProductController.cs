@@ -109,5 +109,18 @@ namespace Arpick.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("relatedproduct")]
+        public ActionResult<IEnumerable<ProductModel>> GetRelatedProducts()
+        {
+            try
+            {
+                var relatedProducts = _productService.GetRelatedProducts();
+                return Ok(relatedProducts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

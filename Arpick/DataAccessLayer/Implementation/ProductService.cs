@@ -208,6 +208,43 @@ namespace Arpick.DataAccessLayer.Implementation
                 }
             }
         }
+        public IEnumerable<ProductModel> GetRelatedProducts()
+        {
+            using (SqlConnection connection = new SqlConnection(_configuration["ConnectionStrings:Connection"]))
+            {
+                connection.Open();
+
+                string query = @"
+            SELECT * FROM (
+                SELECT *, ROW_NUMBER() OVER(PARTITION BY Category ORDER BY NEWID()) AS rn
+                FROM Products
+            ) AS temp
+            WHERE rn = 1";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        List<ProductModel> relatedProducts = new List<ProductModel>();
+
+                        while (reader.Read())
+                        {
+                            relatedProducts.Add(new ProductModel
+                            {
+                                Id = (int)reader["Id"],
+                                Name = (string)reader["Name"],
+                                ImageUrl = (string)reader["ImageUrl"],
+                                NewPrice = (decimal)reader["NewPrice"],
+                                OldPrice = (decimal)reader["OldPrice"]
+                            });
+                        }
+
+                        return relatedProducts;
+                    }
+                }
+            }
+        }
+
 
     }
 }
