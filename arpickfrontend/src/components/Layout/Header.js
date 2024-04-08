@@ -50,6 +50,30 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item dropdown">
+              <NavLink
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                style={{ border: "none" }}
+              >
+                Services
+              </NavLink>
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink className="dropdown-item" to="/booking">
+                    Package Booking
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/cost-estimation">
+                    Pricing and Cost Estimation
+                  </NavLink>
+                </li>
+                {/* Add more NavLink components for other logistics features */}
+              </ul>
+            </li>
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/shipments">
                 Shipments

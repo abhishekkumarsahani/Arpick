@@ -13,6 +13,7 @@ import AdminRoute from "./components/Routes/AdminRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddProduct from "./components/AddProduct/AddProduct";
 import ListProduct from "./components/ListProduct/ListProduct";
+import PackageBooking from "./components/PackageBooking/PackageBooking";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/booking" element={<PackageBooking />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="*" element={<Pagenotfound />} />
       </Routes>

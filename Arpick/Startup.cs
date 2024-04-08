@@ -1,9 +1,11 @@
 ﻿using Arpick.DataAccessLayer.Implementation;
 using Arpick.DataAccessLayer.Interface;
+using Arpick.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net.Mail;
 using System.Text;
 
 namespace Arpick
@@ -26,7 +28,13 @@ namespace Arpick
             services.AddScoped<IAuth, Auth>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IImageService, ImageService>();
-           
+            services.AddScoped<IPackageService, PackageService>();
+            // Configure SmtpSettings from appsettings.json
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+
+            // Register EmailService
+            services.AddScoped<IEmailService, EmailService>();
+
 
 
 
