@@ -19,7 +19,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <Toaster />
         {children}
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
@@ -29,6 +29,5 @@ Layout.defaultProps = {
   keywords: "react,asp.net core,ssms",
   author: "Abhi",
 };
-
 
 export default Layout;

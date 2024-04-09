@@ -13,7 +13,7 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [all_product, setAll_Product] = useState([]);
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = JSON.parse(localStorage.getItem("cartItems"));

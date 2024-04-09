@@ -70,6 +70,11 @@ const Header = () => {
                     Pricing and Cost Estimation
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/feedback">
+                    Feedback
+                  </NavLink>
+                </li>
                 {/* Add more NavLink components for other logistics features */}
               </ul>
             </li>

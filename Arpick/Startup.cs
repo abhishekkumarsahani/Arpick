@@ -34,6 +34,7 @@ namespace Arpick
 
             // Register EmailService
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
 
 
 
