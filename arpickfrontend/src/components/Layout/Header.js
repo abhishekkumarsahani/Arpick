@@ -4,6 +4,7 @@ import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { ShopContext } from "../../context/ShopContext";
 import { Badge } from "antd";
+import applogo from '../Assets/applogo.png'
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -24,7 +25,7 @@ const Header = () => {
       <div className="container-fluid">
         {/* Branding */}
         <img
-          src="https://static.vecteezy.com/system/resources/previews/013/068/247/non_2x/logistics-logo-design-arrow-icon-with-a-creative-and-simple-concept-vector.jpg"
+          src={applogo}
           style={{ width: 120, height: 50 }}
           alt="logo"
         />
@@ -73,6 +74,11 @@ const Header = () => {
                 <li>
                   <NavLink className="dropdown-item" to="/feedback">
                     Feedback
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/route">
+                    Route Optimization
                   </NavLink>
                 </li>
                 {/* Add more NavLink components for other logistics features */}

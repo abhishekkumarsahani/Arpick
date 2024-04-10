@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import { NavLink } from "react-router-dom";
 import API_BASE_URL from "../../apiConfig";
-
+import applogo from "../../components/Assets/applogo.png";
 
 const SignIn = () => {
   const [Email, setEmail] = useState("");
@@ -58,8 +58,8 @@ const SignIn = () => {
                     <div className="card-body p-md-5 mx-md-4">
                       <div className="text-center">
                         <img
-                          src="https://static.vecteezy.com/system/resources/previews/013/068/247/non_2x/logistics-logo-design-arrow-icon-with-a-creative-and-simple-concept-vector.jpg"
-                          style={{ width: 185 }}
+                          src={applogo}
+                          style={{ width: 185, margin: "auto" }}
                           alt="logo"
                         />
                         <h4 className="mt-1 mb-5 pb-1">Login Your Account</h4>
@@ -120,11 +120,13 @@ const SignIn = () => {
                     <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                       <h4 className="mb-4">We are more than just a company</h4>
                       <p className="small mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat.
+                        Welcome back! Log in to your account to access our
+                        comprehensive logistics and inventory management system.
+                        With intuitive interfaces and advanced features,
+                        managing your supply chain has never been easier. Stay
+                        updated with real-time tracking and streamline your
+                        operations effortlessly. Join us today and experience
+                        seamless logistics management tailored to your needs.
                       </p>
                     </div>
                   </div>

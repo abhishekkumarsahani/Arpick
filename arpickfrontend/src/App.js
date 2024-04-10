@@ -16,6 +16,7 @@ import ListProduct from "./components/ListProduct/ListProduct";
 import PackageBooking from "./components/PackageBooking/PackageBooking";
 import FareCalculator from "./components/FareCalculator/FareCalculator";
 import FeedbackForm from "./components/Feedback/Feedback";
+import RouteOptimization from "./components/RouteOptimization/RouteOptimization";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/booking" element={<PackageBooking />} />
         <Route path="/cost-estimation" element={<FareCalculator />} />
         <Route path="/feedback" element={<FeedbackForm/>} />
+        <Route path="/route" element={<RouteOptimization/>} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="*" element={<Pagenotfound />} />
       </Routes>

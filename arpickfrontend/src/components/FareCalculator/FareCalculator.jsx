@@ -27,8 +27,8 @@ const FareCalculator = () => {
 
     return (
         <Layout title="Farecalculator Page">
-        <div className="container">
-            <div className="image-container">
+        <div className="containers">
+            <div className="image-containers">
                 <img src={fareimage} alt="background" />
             </div>
             <div className="fare-calculator-content">

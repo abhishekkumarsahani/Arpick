@@ -40,7 +40,7 @@ const FeedbackForm = () => {
               required
             />
           </div>
-          <button type="submit">Submit Feedback</button>
+          <button className="feedback-btn" type="submit">Submit Feedback</button>
         </form>
       </div>
     </Layout>

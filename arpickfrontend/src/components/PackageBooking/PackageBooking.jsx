@@ -69,7 +69,7 @@ const PackageBooking = () => {
 
   return (
     <Layout title="Book package">
-    <div className="container">
+    <div className="package-container">
         <div className="image-container">
         <img src={hero_image} alt="" />
         </div>

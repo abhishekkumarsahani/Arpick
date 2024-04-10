@@ -3,6 +3,7 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import applogo from "../../components/Assets/applogo.png";
 
 const ForgotPassword = () => {
   const [Email, setEmail] = useState("");
@@ -44,8 +45,8 @@ const ForgotPassword = () => {
                     <div className="card-body p-md-5 mx-md-4">
                       <div className="text-center">
                         <img
-                          src="https://static.vecteezy.com/system/resources/previews/013/068/247/non_2x/logistics-logo-design-arrow-icon-with-a-creative-and-simple-concept-vector.jpg"
-                          style={{ width: 185 }}
+                          src={applogo}
+                          style={{ width: 185,margin: "auto" }}
                           alt="logo"
                         />
                         <h4 className="mt-1 mb-5 pb-1">Change your Password</h4>

@@ -1,4 +1,4 @@
-.container {
+.containers {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,18 +8,19 @@
 
 }
 
-.image-container {
+.image-containers {
   flex: 1;
 }
 
-.image-container img {
+.image-containers img {
   width: 100%;
   height: auto;
 }
 
 .fare-calculator-content {
   flex: 1;
-  padding: 20px;
+  padding: 40px;
+  margin-right: 50px;
   background-color: #f9f9f9;
 }
 
