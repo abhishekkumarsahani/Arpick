@@ -264,15 +264,100 @@ namespace Arpick.DataAccessLayer.Implementation
         }
 
 
-        //private string GenerateRandomPassword()
-        //{
-        //    // Generate a random password of desired length
-        //    // This is just a simple example, you might want to use a more secure method
-        //    string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        //    Random random = new Random();
-        //    return new string(Enumerable.Repeat(chars, 8)
-        //        .Select(s => s[random.Next(s.Length)]).ToArray());
-        //}
+        public async Task<UserModel> GetUserDetails(int userId)
+        {
+            UserModel userDetails = null;
+
+            try
+            {
+                if (_sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    await _sqlConnection.OpenAsync();
+                }
+
+                string sqlQuery = @"SELECT * FROM ARPICK.dbo.UserTable WHERE UserId=@UserId;";
+
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, _sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue("@UserId", userId);
+
+                    using (DbDataReader dataReader = await sqlCommand.ExecuteReaderAsync())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            await dataReader.ReadAsync();
+                            userDetails = new UserModel
+                            {
+                                UserId = dataReader["UserId"] != DBNull.Value ? Convert.ToInt32(dataReader["UserId"]) : 0,
+                                UserName = dataReader["UserName"] != DBNull.Value ? Convert.ToString(dataReader["UserName"]) : string.Empty,
+                                Email = dataReader["Email"] != DBNull.Value ? Convert.ToString(dataReader["Email"]) : string.Empty,
+                                FullName = dataReader["FullName"] != DBNull.Value ? Convert.ToString(dataReader["FullName"]) : string.Empty,
+                                Address = dataReader["Address"] != DBNull.Value ? Convert.ToString(dataReader["Address"]) : string.Empty,
+                                Contact = dataReader["Contact"] != DBNull.Value ? Convert.ToString(dataReader["Contact"]) : string.Empty,
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+
+            return userDetails;
+        }
+        public async Task<bool> UpdateUserDetails(UserModel user)
+        {
+            try
+            {
+                if (_sqlConnection.State != System.Data.ConnectionState.Open)
+                {
+                    await _sqlConnection.OpenAsync();
+                }
+
+                string sqlQuery = @"
+            UPDATE ARPICK.dbo.UserTable 
+            SET UserName = @UserName, 
+                Email = @Email, 
+                FullName = @FullName, 
+                Address = @Address, 
+                Contact = @Contact 
+            WHERE UserId = @UserId;";
+
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, _sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue("@UserName", user.UserName);
+                    sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                    sqlCommand.Parameters.AddWithValue("@FullName", user.FullName);
+                    sqlCommand.Parameters.AddWithValue("@Address", user.Address);
+                    sqlCommand.Parameters.AddWithValue("@Contact", user.Contact);
+                    sqlCommand.Parameters.AddWithValue("@UserId", user.UserId);
+
+                    int rowsAffected = await sqlCommand.ExecuteNonQueryAsync();
+
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return false;
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
+
 
     }
 }

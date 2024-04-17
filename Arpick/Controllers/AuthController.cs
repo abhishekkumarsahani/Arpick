@@ -64,5 +64,42 @@ namespace Arpick.Controllers
             }
             return Ok(response);
         }
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<UserModel>> GetUserDetails(int userId)
+        {
+            var userDetails = await _auth.GetUserDetails(userId);
+            if (userDetails == null)
+            {
+                return NotFound("User not found");
+            }
+            return userDetails;
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUserDetails(int userId, UserModel user)
+        {
+            if (userId != user.UserId)
+            {
+                return BadRequest("User ID in the request path does not match the user ID in the request body.");
+            }
+
+            try
+            {
+                bool success = await _auth.UpdateUserDetails(user);
+
+                if (success)
+                {
+                    return Ok("User details updated successfully.");
+                }
+                else
+                {
+                    return NotFound($"User with ID {userId} not found or failed to update user details.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while updating user details: {ex.Message}");
+            }
+        }
     }
 }

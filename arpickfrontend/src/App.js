@@ -17,6 +17,7 @@ import PackageBooking from "./components/PackageBooking/PackageBooking";
 import FareCalculator from "./components/FareCalculator/FareCalculator";
 import FeedbackForm from "./components/Feedback/Feedback";
 import RouteOptimization from "./components/RouteOptimization/RouteOptimization";
+import UserDetail from "./pages/User/Profile/Profile";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
+          <Route path="user/profile" element={<UserDetail />} />
+
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
