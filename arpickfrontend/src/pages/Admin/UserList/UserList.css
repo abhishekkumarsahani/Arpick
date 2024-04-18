@@ -1,0 +1,25 @@
+.user-list-container {
+    padding: 20px;
+  }
+  
+  .user-list-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .user-table th {
+    background-color: #f2f2f2;
+  }
+  

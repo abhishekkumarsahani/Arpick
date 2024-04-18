@@ -29,6 +29,7 @@ namespace Arpick
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IPackageService, PackageService>();
+            services.AddScoped<IAdminService, AdminService>();
             // Configure SmtpSettings from appsettings.json
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
 

@@ -1,0 +1,27 @@
+
+.about-container {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    padding: 50px;
+    margin-top: 70px;
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .about-content {
+    color: #fff;
+  }
+  
+  .about-content h2 {
+    color: #fff;
+  }
+  
+  .about-content p {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  

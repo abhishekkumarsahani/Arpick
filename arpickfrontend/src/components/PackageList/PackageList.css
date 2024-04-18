@@ -1,0 +1,64 @@
+.list-package {
+    background: linear-gradient(to bottom, #ffffff, #f3f3f3);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .list-package h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .listpackage-format-main {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* Adjust column widths */
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .listpackage-allpackages {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  
+  .listpackage-format-main,
+  .listpackage-format {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* Match with column structure */
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .listpackage-remove-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  /* Media Queries */
+  @media only screen and (max-width: 768px) {
+    .listpackage-format-main,
+    .listpackage-format {
+      font-size: 14px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .listpackage-format-main,
+    .listpackage-format {
+      grid-template-columns: 1fr 2fr 1fr; /* Adjust column widths */
+      font-size: 12px;
+    }
+  
+    .listpackage-remove-icon {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  

@@ -1,0 +1,29 @@
+/* Custom CSS for Policy page */
+
+.policy-container {
+    padding: 50px;
+    margin-top: 70px;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .policy-image {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .policy-info {
+    margin-top: 20px;
+  }
+  
+  .policy-info p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .policy-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  

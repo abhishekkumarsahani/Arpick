@@ -322,13 +322,13 @@ namespace Arpick.DataAccessLayer.Implementation
                 }
 
                 string sqlQuery = @"
-            UPDATE ARPICK.dbo.UserTable 
-            SET UserName = @UserName, 
-                Email = @Email, 
-                FullName = @FullName, 
-                Address = @Address, 
-                Contact = @Contact 
-            WHERE UserId = @UserId;";
+                                    UPDATE ARPICK.dbo.UserTable 
+                                    SET UserName = @UserName, 
+                                    Email = @Email, 
+                                    FullName = @FullName, 
+                                    Address = @Address, 
+                                    Contact = @Contact 
+                                    WHERE UserId = @UserId;";
 
                 using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, _sqlConnection))
                 {
