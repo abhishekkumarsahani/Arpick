@@ -56,6 +56,10 @@ const ShopContextProvider = (props) => {
       return prevCartItems;
     });
   };
+  const removeAllFromCart = () => {
+    setCartItems({}); // Clear the cart by setting it to an empty object
+    localStorage.removeItem("cartItems"); // Remove cart data from localStorage
+  };
 
   const updateCartInLocalStorage = (productId, quantity) => {
     const userId = auth?.user?.userId;
@@ -100,6 +104,7 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     removeFromCart,
+    removeAllFromCart,
   };
 
   return (
