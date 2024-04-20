@@ -23,6 +23,7 @@ import UserList from "./pages/Admin/UserList/UserList";
 import About from "./pages/About/AboutPage";
 import Contact from "./pages/Contact/Contact";
 import Policy from "./pages/Policy/Policy";
+import ChatService from "./pages/ChatService";
 function App() {
   return (
     <>
@@ -53,6 +54,7 @@ function App() {
         <Route path="/cost-estimation" element={<FareCalculator />} />
         <Route path="/feedback" element={<FeedbackForm/>} />
         <Route path="/route" element={<RouteOptimization/>} />
+        <Route path="/chat" element={<ChatService/>} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="*" element={<Pagenotfound />} />
       </Routes>

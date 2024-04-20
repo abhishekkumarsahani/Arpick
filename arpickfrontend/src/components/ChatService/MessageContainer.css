@@ -1,0 +1,26 @@
+/* MessageContainer.css */
+
+/* Style for the entire message container */
+.message-container {
+    padding: 10px;
+  }
+  
+  /* Style for messages */
+  .message {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+  
+  /* Style for messages from the current user */
+  .current-user {
+    background-color: #007bff; /* Blue color for current user's messages */
+    color: #fff; /* White text color */
+  }
+  
+  /* Style for messages from other users */
+  .other-user {
+    background-color: #f0f0f0; /* Light gray color for other users' messages */
+    color: #000; /* Black text color */
+  }
+  

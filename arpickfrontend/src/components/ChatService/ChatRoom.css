@@ -1,0 +1,40 @@
+/* ChatRoom.css */
+
+/* Chat room container */
+.chat-room {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Header styling */
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  /* Content styling */
+  .content {
+    margin-top: 20px;
+  }
+  
+  /* Message styling */
+  .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  /* Sent message styling */
+  .sent-message {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Received message styling */
+  .received-message {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  

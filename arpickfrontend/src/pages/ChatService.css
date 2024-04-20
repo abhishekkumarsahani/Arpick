@@ -1,0 +1,82 @@
+/* ChatService.css */
+
+/* Main container */
+.chatapp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Header */
+  .chatheader {
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Chat room container */
+  .chat-room {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Waiting room container */
+  .waiting-room {
+    text-align: center;
+  }
+  
+  /* Message container */
+  .message-container {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Individual messages */
+  .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Received messages */
+  .received-message {
+    background-color: #f0f0f0;
+  }
+  
+  /* Sent messages */
+  .sent-message {
+    background-color: #d4edda;
+  }
+  
+  /* Message input form */
+  .message-form {
+    display: flex;
+  }
+  
+  /* Message input field */
+  .message-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ced4da;
+  }
+  
+  /* Send button */
+  .send-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for send button */
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  

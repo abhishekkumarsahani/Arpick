@@ -1,10 +1,17 @@
 ﻿using Arpick.DataAccessLayer.Implementation;
 using Arpick.DataAccessLayer.Interface;
+using Arpick.DataService;
+using Arpick.Hubs;
 using Arpick.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 using System.Net.Mail;
 using System.Text;
 
@@ -32,10 +39,26 @@ namespace Arpick
             services.AddScoped<IAdminService, AdminService>();
             // Configure SmtpSettings from appsettings.json
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+            services.AddSignalR();
 
             // Register EmailService
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddSingleton<ShareDb>();
+            // Configure CORS
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("reactApp", builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
+
+
 
 
 
@@ -105,46 +128,34 @@ namespace Arpick
 
             app.UseHttpsRedirection();
 
-            
-
             // Serve static files from the 'images' directory
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "upload/images")),
                 RequestPath = "/upload/images"
             });
-            app.UseRouting();
 
+            // Configure CORS
+            app.UseCors("reactApp"); // Use the CORS policy named "reactApp" here
+
+            app.UseRouting();
             app.UseAuthorization();
 
-            #region Cors
-
-            app.UseCors();
-            app.UseCors(builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
-
-            #endregion
-
             #region Swagger
-
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             });
-
             #endregion
 
-
+            // Map SignalR hub
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/Chat");
                 endpoints.MapControllers();
             });
         }
-        }
+
+    }
 }
