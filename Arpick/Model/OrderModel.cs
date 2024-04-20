@@ -2,15 +2,12 @@
 {
     public class OrderModel
     {
-        public int Id { get; set; } // Assuming you have an ID for each order
+        public int UserId { get; set; }
+        public List<int> ProductIds { get; set; }
+        public string PaymentStatus { get; set; }
+        public int OrderId { get; set; }
+        public List<ProductModel>? Products { get; set; } // Add this property
 
-        public int UserId { get; set; } // ID of the user who placed the order
-
-        public int ProductId { get; set; } // ID of the product in the order
-
-        public string PaymentPayload { get; set; } // Payment details, such as payload from Khalti
-
-        // Additional properties as needed, such as order date, quantity, etc.
     }
 
 }

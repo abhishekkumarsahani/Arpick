@@ -1,4 +1,8 @@
-﻿using Arpick.DataAccessLayer.Interface;
+﻿// OrderController.cs
+using System.Threading.Tasks;
+using Arpick.DataAccessLayer.Implementation;
+using Arpick.DataAccessLayer.Interface;
+using Arpick.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Arpick.Controllers
@@ -15,25 +19,45 @@ namespace Arpick.Controllers
         }
 
         [HttpPost("store")]
-        public async Task<IActionResult> StoreOrderDetails(int userId, string productId, string paymentPayload)
+        public async Task<IActionResult> StoreOrderDetails([FromBody] OrderModel order)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var storedOrder = await _orderService.StoreOrderDetailsAsync(order);
+                return Ok(storedOrder);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error storing order details: {ex.Message}");
+            }
+        }
+        // GET: api/order/{userId}
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetOrdersWithProducts(int userId)
         {
             try
             {
-                bool success = await _orderService.StoreOrderDetailsAsync(userId, productId, paymentPayload);
-                if (success)
+                // Fetch orders for the given userId
+                List<OrderModel> orders = await _orderService.GetOrdersByUserId(userId);
+
+                // For each order, fetch product details and add them to the order
+                foreach (var order in orders)
                 {
-                    return Ok("Order details stored successfully.");
+                    List<ProductModel> products = await _orderService.GetProductsByOrderId(order.OrderId);
+                    order.Products = products;
                 }
-                else
-                {
-                    return BadRequest("Failed to store order details.");
-                }
+
+                return Ok(orders);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
     }
 }

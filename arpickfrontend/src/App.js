@@ -24,6 +24,7 @@ import About from "./pages/About/AboutPage";
 import Contact from "./pages/Contact/Contact";
 import Policy from "./pages/Policy/Policy";
 import ChatService from "./pages/ChatService";
+import OrderDetails from "./pages/User/Order/Order";
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
           <Route path="user/profile" element={<UserDetail />} />
+          <Route path="user/orders" element={<OrderDetails />} />
 
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>

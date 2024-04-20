@@ -23,26 +23,22 @@ const CartItems = () => {
     } else {
       // Initialize Khalti Checkout
       var config = {
-        publicKey: "test_public_key_f5435ba8f609495cb7487c5a107c9915", // Replace with your Khalti public key
-        productIdentity: "your_product_identity", // Replace with your product ID
-        productName: "Product Name", // Replace with your product name
-        productUrl: "http://example.com/product-url", // Replace with your product URL
+        publicKey: "test_public_key_f5435ba8f609495cb7487c5a107c9915",
+        productIdentity: "your_product_identity",
+        productName: "Product Name",
+        productUrl: "http://example.com/product-url",
         eventHandler: {
-          // Inside handleProceedToCheckout function
           onSuccess: (payload) => {
             console.log("Payment successful:", payload);
-            const productId = Object.keys(cartItems).filter((productId) => cartItems[productId] > 0); // Get productIds from cartItems
-            if (!productId) {
-              toast.error("Product ID is missing.");
+            const productIds = Object.keys(cartItems).filter(productId => cartItems[productId] > 0);
+            if (!productIds || productIds.length === 0) {
+              toast.error("Product IDs are missing.");
               return;
             }
-            // Empty the cart
             removeAllFromCart();
-            // Make API call to store order details
-            storeOrderDetails(auth.user.userId, productId, payload)
+            storeOrderDetails(auth.user.userId, productIds, payload)
               .then(() => {
-                // Redirect to order page
-                window.location.href = "/order";
+                window.location.href = "/dashboard/user/orders";
               })
               .catch((error) => {
                 console.error("Error storing order details:", error);
@@ -58,37 +54,39 @@ const CartItems = () => {
           },
         },
       };
-
+  
       // Create a new instance of Khalti Checkout
       var checkout = new KhaltiCheckout(config);
-
-      // Open Khalti Checkout
-      checkout.show({ amount: getTotalCartAmount() * 100 }); // Amount should be in paisa
+      checkout.show({ amount: getTotalCartAmount() * 100 });
     }
   };
-
-  // Function to store order details
-  const storeOrderDetails = (userId, paymentPayload) => {
-    const token = auth.token; // Get authorization token
-    const productId = Object.keys(cartItems).filter((productId) => cartItems[productId] > 0); // Get productIds from cartItems
-    // Example API call to store order details
-    return fetch(`https://localhost:44337/api/Order/store?userId=${userId}&productId=${productId}&paymentPayload=${paymentPayload}`, {
+  
+  const storeOrderDetails = (userId, productIds, paymentPayload) => {
+    const token = auth.token;
+    return fetch(`https://localhost:44337/api/Order/store`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include authorization token
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         userId: userId,
-        productId: productId,
+        productIds: productIds,
         paymentPayload: paymentPayload,
+        PaymentStatus: "success",
       }),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to store order details");
-      }
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to store order details");
+        }
+      })
+      .catch((error) => {
+        console.error("Error storing order details:", error);
+        throw error;
+      });
   };
+  
 
   return (
     <div className="cartitems">
