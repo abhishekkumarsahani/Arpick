@@ -30,13 +30,16 @@ const CartItems = () => {
         eventHandler: {
           onSuccess: (payload) => {
             console.log("Payment successful:", payload);
-            const productIds = Object.keys(cartItems).filter(productId => cartItems[productId] > 0);
-            if (!productIds || productIds.length === 0) {
-              toast.error("Product IDs are missing.");
+            const productQuantities = Object.keys(cartItems).map(productId => ({
+              ProductId: productId,
+              Quantity: cartItems[productId]
+            }));
+            if (!productQuantities || productQuantities.length === 0) {
+              toast.error("Product quantities are missing.");
               return;
             }
             removeAllFromCart();
-            storeOrderDetails(auth.user.userId, productIds, payload)
+            storeOrderDetails(auth.user.userId, productQuantities, payload)
               .then(() => {
                 window.location.href = "/dashboard/user/orders";
               })
@@ -61,7 +64,7 @@ const CartItems = () => {
     }
   };
   
-  const storeOrderDetails = (userId, productIds, paymentPayload) => {
+  const storeOrderDetails = (userId, productQuantities, paymentPayload) => {
     const token = auth.token;
     return fetch(`https://localhost:44337/api/Order/store`, {
       method: "POST",
@@ -71,7 +74,7 @@ const CartItems = () => {
       },
       body: JSON.stringify({
         userId: userId,
-        productIds: productIds,
+        productQuantities: productQuantities,
         paymentPayload: paymentPayload,
         PaymentStatus: "success",
       }),

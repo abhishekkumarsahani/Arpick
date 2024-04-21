@@ -46,8 +46,8 @@ const OrderDetails = () => {
                 <td>
                   <ul className="product-list">
                     {order.products.map((product) => (
-                      <li key={product.productId} className="product-item">
-                        {product.name} - NPRs{product.newPrice}
+                      <li key={product.id} className="product-item">
+                        {product.name} - NPRs{product.newPrice} (Quantity: {product.quantity})
                       </li>
                     ))}
                   </ul>

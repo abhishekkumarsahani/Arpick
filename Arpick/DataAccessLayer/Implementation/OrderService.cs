@@ -31,10 +31,10 @@ namespace Arpick.DataAccessLayer.Implementation
                     await connection.OpenAsync();
 
                     var query = @"
-                            INSERT INTO Orders (UserId, PaymentStatus)
-                            VALUES (@UserId, @PaymentStatus);
-                            SELECT SCOPE_IDENTITY();
-                        ";
+                INSERT INTO Orders (UserId, PaymentStatus)
+                VALUES (@UserId, @PaymentStatus);
+                SELECT SCOPE_IDENTITY();
+            ";
 
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -44,16 +44,17 @@ namespace Arpick.DataAccessLayer.Implementation
                         int orderId = Convert.ToInt32(await command.ExecuteScalarAsync());
 
                         query = @"
-                                INSERT INTO OrderProducts (OrderId, ProductId)
-                                VALUES (@OrderId, @ProductId);
-                                ";
+                    INSERT INTO OrderProducts (OrderId, ProductId, Quantity)
+                    VALUES (@OrderId, @ProductId, @Quantity);
+                ";
 
-                        foreach (var productId in order.ProductIds)
+                        foreach (var productQuantity in order.ProductQuantities)
                         {
                             using (var productCommand = new SqlCommand(query, connection))
                             {
                                 productCommand.Parameters.AddWithValue("@OrderId", orderId);
-                                productCommand.Parameters.AddWithValue("@ProductId", productId);
+                                productCommand.Parameters.AddWithValue("@ProductId", productQuantity.ProductId);
+                                productCommand.Parameters.AddWithValue("@Quantity", productQuantity.Quantity);
                                 await productCommand.ExecuteNonQueryAsync();
                             }
                         }
@@ -70,6 +71,7 @@ namespace Arpick.DataAccessLayer.Implementation
             }
         }
 
+
         public async Task<List<ProductModel>> GetProductsByOrderId(int orderId)
         {
             List<ProductModel> products = new List<ProductModel>();
@@ -81,7 +83,7 @@ namespace Arpick.DataAccessLayer.Implementation
                     await connection.OpenAsync();
 
                     var query = @"
-                         SELECT p.Id, p.Name, p.NewPrice
+                         SELECT p.Id, p.Name, p.NewPrice, od.Quantity
                             FROM Products p
                             INNER JOIN OrderProducts od ON p.Id = od.ProductId
                             WHERE od.OrderId =  @OrderId;
@@ -99,7 +101,9 @@ namespace Arpick.DataAccessLayer.Implementation
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     Name = reader["Name"].ToString(),
-                                    NewPrice = Convert.ToDecimal(reader["NewPrice"])
+                                    NewPrice = Convert.ToDecimal(reader["NewPrice"]),
+                                    Quantity = Convert.ToInt32(reader["Quantity"])
+
                                 };
                                 products.Add(product);
                             }
