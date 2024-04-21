@@ -25,6 +25,7 @@ import Contact from "./pages/Contact/Contact";
 import Policy from "./pages/Policy/Policy";
 import ChatService from "./pages/ChatService";
 import OrderDetails from "./pages/User/Order/Order";
+import NewsBlogPage from "./components/Blog/Blog";
 function App() {
   return (
     <>
@@ -52,6 +53,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
+        <Route path="/blog" element={<NewsBlogPage />} />
         <Route path="/booking" element={<PackageBooking />} />
         <Route path="/cost-estimation" element={<FareCalculator />} />
         <Route path="/feedback" element={<FeedbackForm/>} />
